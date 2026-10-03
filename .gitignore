@@ -1,2 +1,7 @@
-results/
+results/*
+!results/NaturalDesign/
+results/NaturalDesign/*
+!results/NaturalDesign/IVSN_res_myrun.pkl
 codes/dataset/
+__pycache__/
+*.pyc

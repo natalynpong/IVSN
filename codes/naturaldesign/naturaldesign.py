@@ -39,7 +39,7 @@ class NaturalDesign(Dataset):
     ]) 
 
   def __len__(self):
-    return len(os.listdir(self.context_dir))
+    return len([f for f in os.listdir(self.context_dir) if f.endswith('.jpg')])
   
   def __getitem__(self, idx):
     context_file = os.path.join(self.context_dir, 'img{:03}.jpg'.format(idx))
