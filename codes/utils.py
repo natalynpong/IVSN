@@ -24,7 +24,14 @@ import PIL
 from PIL import Image, ImageDraw
 from tqdm import tqdm, trange
 import cv2 as cv
-from google.colab.patches import cv2_imshow
+def cv2_imshow(img):
+    import matplotlib.pyplot as plt
+    if img.ndim == 3:
+        plt.imshow(img[:, :, ::-1])      # OpenCV is BGR, matplotlib expects RGB
+    else:
+        plt.imshow(img, cmap="gray")
+    plt.axis("off")
+    plt.show()
 from ml_collections import ConfigDict
 
 # extract info of pic for further analysis
@@ -108,7 +115,7 @@ def searchProcesswithPath(tg_xy, attentionMap, image_size, size):
     return count, searchPath
 
 def model_performance(search_list, image_num):
-    search_counter = pd.value_counts(search_list)
+    search_counter = pd.Series(search_list).value_counts()
     # max_search_times = max(search_list)
     max_search_times = 99
     sum_found_model = 0
